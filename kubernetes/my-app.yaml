@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/sourabh-nandi1/devsecops-demo.git
+    targetRevision: HEAD
+    path: kubernetes
+  destination:
+    server: https://178759C6AB315E8A3BA25E3A89847189.gr7.eu-west-2.eks.amazonaws.com
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
