@@ -5,7 +5,7 @@ metadata:
   labels:
     app: tic-tac-toe
 spec:
-  type: LoadBalancer # Change from ClusterIP to LoadBalancer
+  type: ClusterIP # <-- changed from LoadBalancer
   ports:
     - port: 80
       targetPort: 80

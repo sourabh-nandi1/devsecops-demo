@@ -3,12 +3,15 @@ kind: Ingress
 metadata:
   name: tic-tac-toe-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
-    # Add additional annotations as needed for your specific ingress controller
-    # nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-2:308004181423:certificate/arn:aws:acm:eu-west-2:308004181423:certificate/17a5b1ce-65a7-4b57-9f5f-05b4d226f3ba
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
 spec:
   rules:
-    - host: tic-tac-toe.example.com # Replace with your actual domain
+    - host: tic-tac-toe.demolabs.uk
       http:
         paths:
           - path: /
@@ -18,8 +21,3 @@ spec:
                 name: tic-tac-toe
                 port:
                   number: 80
-  # Uncomment and configure if you want TLS
-  # tls:
-  # - hosts:
-  #   - tic-tac-toe.example.com
-  #   secretName: tic-tac-toe-tls
